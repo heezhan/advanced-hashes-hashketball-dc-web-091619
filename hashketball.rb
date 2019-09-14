@@ -206,15 +206,22 @@ def player_stats(player)
 end
 
 def big_shoe_rebounds
+  biggest = 0 
+  rebounds = 0 
   game_hash.each do |home_away, team|
     team.each do |attribute, data|
-      if attribute == :players 
+      if attribute == :players
         data.each do |stats|
-          return stats[:rebounds] if stats[:player_name] == "Mason Plumlee"
+          size = stats[:shoe]
+          if size > biggest
+            biggest = size
+            rebounds = stats[:rebounds]
+          end 
         end 
       end 
     end 
   end
+  return rebounds 
 end
   
 def most_points_scored
